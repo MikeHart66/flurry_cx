@@ -1,0 +1,57 @@
+#rem
+	Script:			flurry.cxs
+	Description:	Flurry module for Cerberus X.
+	Author: 		Michael Hartlef
+	Version:      	1.22
+	License:		MIT
+#End
+
+#If TARGET<>"android" And TARGET<>"ios"
+#Error "This Flurry module is only available on the android and ios targets."
+#End
+
+#If TARGET="android"
+
+Import "native/flurry.android.java"
+
+#LIBS+="${CD}/native/flurryAnalytics_3.4.0.jar"
+
+'If you need it, add this manually to your manifest file. <uses-permission  android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+#Else
+
+Import "native/flurry.ios.cpp"
+
+#LIBS+="${CD}/native/libFlurry_4.4.0.a"
+#LIBS+="${CD}/native/Flurry.h"
+#LIBS+="SystemConfiguration.framework"
+#LIBS+="Security.framework"
+
+#End
+
+Extern
+
+Class Flurry Extends Null="BBFlurry"
+
+	Function GetFlurry:Flurry()
+	
+	Method onStartSession:Void()
+	
+	Method onEndSession:Void()
+	
+	Method logEvent:Void(eventId:String)
+	Method logEvent:Void(eventId:String, param:String[])
+	Method logEvent:Void(eventId:String, timed:Bool)
+	Method logEvent:Void(eventId:String, param:String[], timed:Bool)
+	
+	Method setLogEnabled:Void(logFlag:Bool)
+
+	Method onError:Void(errorId:String, message:String, errorClass:String)
+
+	Method onPageView:Void()
+	
+	Method setUserID:Void(userID:String)
+	Method setAge:Void(age:Int)
+	Method setGender:Void(gender:String)
+	
+End

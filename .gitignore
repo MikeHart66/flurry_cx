@@ -1,0 +1,10 @@
+
+*.pdf
+*LICENSE.txt
+*.jar
+*.a
+.DS_Store
+*.buildv*
+*.bak
+desktop.ini
+Thumbs.db

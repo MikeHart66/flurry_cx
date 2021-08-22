@@ -1,0 +1,186 @@
+# Module flurry
+
+The *flurry* is a module which brings analytics to monkey with the help of the <a href="http://www.flurry.com/" target="_blank">Flurry SDK</a>. 
+---
+>> Supported platforms
+
+Right now the *flurry* module supports the *Android* and the *iOS* platform.
+---
+>> Importing Flurry into your app/game.
+
+To import the *flurry* module into your program, simply use:
+
+<pre>
+Import flurry
+</pre>
+---
+# Class flurry.Flurry
+
+The class *Flurry* is the one you need to create an instance from when you want to use Flurry inside your app.
+
+# Function GetFlurry:Flurry()
+
+*GetFlurry* returns the instance of your Flurry class.
+
+Example:
+
+<pre>
+Global flurry:Flurry
+'...
+flurry=Flurry.GetFlurry()
+flurry.onStartSession()
+</pre>
+
+Links: 
+
+[[onStartSession]]
+	
+# Method onStartSession:Void()
+
+Insert a call to *onStartSession* to start the event logging. 
+
+Links: 
+
+[[GetFlurry]], [[onEndSession]]
+	
+# Method onEndSession:Void()
+	
+Insert a call to *onEndSession* when a session is complete. This works only on the *Android* platform.
+	
+Links: 
+
+[[GetFlurry]], [[onStartSession]]
+
+# Method logEvent:Void(eventId:String)
+
+Use *logEvent* to track user events that happen during a session. You can track how many times each event occurs, what order events happen in, how long events are, as well as what the most common parameters are for each event. 
+
+Example:
+
+<pre>
+flurry.logEvent("Event #"+eventCount)
+</pre>
+
+Links: 
+
+[[GetFlurry]], [[setLogEnabled]]
+
+# Method logEvent:Void(eventId:String, param:String[])
+
+Example:
+
+<pre>
+flurry.logEvent("Event with params",[eventCount, "Count#", "Michael", "PlayerName"])
+</pre>
+
+Links: 
+
+[[GetFlurry]], [[setLogEnabled]]
+
+# Method logEvent:Void(eventId:String, timed:Bool)
+
+Example:
+
+<pre>
+flurry.logEvent("Event #"+eventCount, True)
+</pre>
+
+Links: 
+
+[[GetFlurry]], [[setLogEnabled]]
+
+# Method logEvent:Void(eventId:String, param:String[], timed:Bool)
+
+Example:
+
+<pre>
+flurry.logEvent("Event with params",[eventCount, "Count#", "Michael", "PlayerName"], True)
+</pre>
+
+
+Links: 
+
+[[GetFlurry]], [[setLogEnabled]]
+
+# Method setLogEnabled:Void(logFlag:Bool)
+
+To disable the FlurryAgent logging, call *setLogEnabled*.
+
+Params: 
+
+logFlag - Set it either to TRUE or FALSE if you want to (de)activate the logging.
+
+Example:
+
+<pre>
+flurry=Flurry.GetFlurry()
+'...
+flurry.setLogEnabled( False )
+</pre>
+
+Links: 
+
+[[GetFlurry]], [[logEvent]]
+
+
+# Method onError:Void(errorId:String, message:String, errorClass:String)
+
+Use *onError* to report errors that your application catches. Flurry will report the first 10 errors to occur in each session.
+
+Links: 
+
+[[GetFlurry]]
+
+# Method onPageView:Void()
+
+Use *onPageView* to report page view count. You should call this method whenever a new page is shown to the user to increment the total count. Page view is tracked separately from events.
+
+Links: 
+
+[[GetFlurry]]
+
+# Method SetUserID:Void(userID:String)
+
+Use this to log the user's assigned ID or username in your system.
+
+<pre>
+flurry=Flurry.GetFlurry()
+'...
+flurry.setUserID( "testUser" )
+</pre>
+
+Links: 
+
+[[SetAge]], [[SetGender]]
+
+# Method SetAge:Void(age:Int)
+
+Use this to log the user's age. Valid inputs are between 1 and 109.
+
+<pre>
+flurry=Flurry.GetFlurry()
+'...
+flurry.setAge( 47 )
+</pre>
+
+Links: 
+
+[[SetUserID]], [[SetGender]]
+
+# Method SetGender:Void(gender:String)
+
+Use this to log the user's gender. Valid inputs are "m" or "f".
+
+<pre>
+flurry=Flurry.GetFlurry()
+'...
+flurry.setGender( "m" )
+</pre>
+
+Links: 
+
+[[SetAge]], [[SetUserID]]
+
+
+
+
